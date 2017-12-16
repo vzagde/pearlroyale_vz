@@ -43,6 +43,7 @@ function signin() {
             return false;
         } else {
             Lockr.set('userdata', res.data);
+            token_data = res.data;
             goto_page('categories.html');
         }
     }).error(function(res) {

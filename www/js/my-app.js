@@ -55,6 +55,8 @@ myApp.onPageInit('index', function(page) {
 
 myApp.onPageInit('categories', function (page) {
     mainView.showNavbar();
+    console.log(token_data);
+    console.log(token_data.id);
     $(".navbar_title").html('');
     myApp.closePanel();
     myApp.showIndicator();
@@ -293,6 +295,7 @@ myApp.onPageInit('items_inner', function (page) {
                    '<p>Floor Amount</p>'+
                    '<p><i class="'+res.items_data.currency_type+'" aria-hidden="true"></i> '+res.items_data.floor_amount+'</p>'+
                    '</div>';
+
         if (res.items_data.bid == 2) {
             $(".bid_button_auto_change").removeClass('bggreen');
             $(".bid_button_auto_change").addClass('bgred');
@@ -396,6 +399,7 @@ myApp.onPageInit('bid_items', function (page) {
                    '<p>Floor Amount</p>'+
                    '<p><i class="'+res.items_data.currency_type+'" aria-hidden="true"></i> '+res.items_data.floor_amount+'</p>'+
                    '</div>';
+
         if (res.items_data.bid == 2) {
             $(".bid_button_auto_change").removeClass('bggreen');
             $(".bid_button_auto_change").addClass('bgred disabled');
