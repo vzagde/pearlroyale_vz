@@ -56,7 +56,8 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 }
 
 div, h1, h2, h3, h4, h5, p, input, textarea, li, button {
-	font-family: 'Roboto', sans-serif;
+	/*font-family: 'Roboto', sans-serif;*/
+	font-family: 'Montserrat', sans-serif;
 }
 
 strong {
@@ -105,14 +106,6 @@ strong {
 
 .content-block-title {
 	font-size: 20px;
-}
-
-.page {
-	/*background: #fff;*/
-}
-
-.col-33 {
-	/*padding: 5%;*/
 }
 
 .navbar {
@@ -201,7 +194,7 @@ strong {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	z-index: 9999;
+	z-index: 13000;
 }
 
 .pearlroyale_preloader > .login_image {
@@ -247,7 +240,6 @@ strong {
 }
 
 .items_amount_container {
-	/*width: 50% !important;*/
 	color: #fff;
 	padding: 4% 1% 4% 4%;
 	font-size: 15px;
@@ -322,24 +314,25 @@ strong {
     font-size: xx-large;
 }
 
-.popup-overlay {
-	/*z-index: 1100;*/
+#profile_listing li {
+	margin: 0;
+	padding: 3% 0;
+}
+
+#profile_listing {
+	margin: 0;
 }
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px) {
-
 }
 
 @media only screen and (min-width:2100px) and (max-width:2740px) {
-
 }
 
 @media only screen and (min-width:1026px) and (max-width:1367px) {
-
 }
 
 @media only screen and (min-width:768px) and (max-width:1025px) {
-
 }
 

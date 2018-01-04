@@ -3,10 +3,13 @@ var threed_src = '';
 var base_url = 'http://pearlroyale.com/pearlroyale_admin/index.php/api_new/';
 var image_path = 'http://pearlroyale.com/pearlroyale_admin/assets/uploads/';
 
+var numbers_validator = /^[0-9]+$/;  
+
 var category_id = 0;
 var auction_id = 0;
 var item_id = 0;
 var filter_state = 0;
+var startIntervalFunctions = '';
 
 var myApp = new Framework7({
     pushState: false,
@@ -46,21 +49,24 @@ $$(document).on('deviceready', function() {
         goto_page('categories.html');
     }
     $(".pearlroyale_preloader").hide();
+    var startIntervalFunctions = setInterval(function(){ check_bid_status(); check_bid_list(); }, 1500);
     mainView.hideNavbar();
 });
 
 myApp.onPageInit('index', function(page) {
     myApp.closePanel();
+    item_id = 0;
 });
 
 myApp.onPageInit('categories', function (page) {
     mainView.showNavbar();
-    console.log(token_data);
-    console.log(token_data.id);
+    // console.log(token_data);
+    // console.log(token_data.id);
     $(".navbar_title").html('');
     myApp.closePanel();
     myApp.showIndicator();
     filter_state = 0;
+    item_id = 0;
 
     $.ajax({
         url: base_url+'get_categories',
@@ -121,6 +127,7 @@ myApp.onPageInit('auctions', function (page) {
     myApp.closePanel();
     myApp.showIndicator();
     filter_state = 0;
+    item_id = 0;
 
     $.ajax({
         url: base_url+'get_auctions',
@@ -152,14 +159,20 @@ myApp.onPageInit('auctions', function (page) {
                 mm='0'+mm;
             } 
 
-            var curr_date = yyyy+'-'+mm+'-'+dd+' '+hh+':'+ii+':'+ss;            
+            var curr_date = yyyy+'-'+('0' + mm).slice(-2)+'-'+('0' + dd).slice(-2)+' '+('0' + hh).slice(-2)+':'+('0' + ii).slice(-2)+':'+('0' + ss).slice(-2);
 
             $.each(res.auctions_data, function(index, value) {
                 var start = value.auction_start_date+' '+value.auction_start_time;
                 var end = value.auction_end_date+' '+value.auction_end_time;
                 var archive = value.auction_archive_date+' '+value.auction_archive_time;
 
+                // console.log(start);
+                // console.log(end);
+                // console.log(archive);
+                // console.log(curr_date);
+
                 auctions_listing += '<div class="col-100" onclick="goto_itmes_page('+value.auction+');">';
+
                 if (curr_date > start && curr_date < end) {
                     auctions_listing += '<div class="card bggreen">';
                 }
@@ -195,6 +208,7 @@ myApp.onPageInit('items', function (page) {
     mainView.showNavbar();
     myApp.closePanel();
     myApp.showIndicator();
+    item_id = 0;
 
     $(".open-popup").click(function() {
         myApp.popup('.popup-about');
@@ -203,6 +217,8 @@ myApp.onPageInit('items', function (page) {
     $(".submit").click(function() {
         $(".close-popup").click();
     })
+
+    $("#items_listing").empty();
 
     $.ajax({
         url: base_url+'get_items',
@@ -215,7 +231,6 @@ myApp.onPageInit('items', function (page) {
             filter_state: filter_state,
         },
     }).done(function(res) {
-        // $("#items_listing").empty();
         if (res.status == 'Success') {
             var html = '';
             $.each(res.productdata, function(index, value) {
@@ -299,11 +314,11 @@ myApp.onPageInit('items_inner', function (page) {
         if (res.items_data.bid == 2) {
             $(".bid_button_auto_change").removeClass('bggreen');
             $(".bid_button_auto_change").addClass('bgred');
-            html += '<div class="col-50 items_amount_container bgred">';
+            html += '<div class="col-50 items_amount_container items_amount_container_change_color bgred">';
         } else {
             $(".bid_button_auto_change").removeClass('bgred');
             $(".bid_button_auto_change").addClass('bggreen');
-            html += '<div class="col-50 items_amount_container bggreen">';
+            html += '<div class="col-50 items_amount_container items_amount_container_change_color bggreen">';
         }
 
         html += '<p>Bidded Amount</p>'+
@@ -323,8 +338,8 @@ myApp.onPageInit('items_inner', function (page) {
             $(".bid_button_auto_change").addClass('bgred');
         }
 
-        console.log($('#clock').html());
-        console.log(res.items_data.bid);
+        // console.log($('#clock').html());
+        // console.log(res.items_data.bid);
 
         $(".itmes_slider").empty();
         $("#item_filters_dynamic").empty();
@@ -403,11 +418,11 @@ myApp.onPageInit('bid_items', function (page) {
         if (res.items_data.bid == 2) {
             $(".bid_button_auto_change").removeClass('bggreen');
             $(".bid_button_auto_change").addClass('bgred disabled');
-            html += '<div class="col-50 items_amount_container bgred">';
+            html += '<div class="col-50 items_amount_container items_amount_container_change_color bgred">';
         } else {
             $(".bid_button_auto_change").removeClass('bgred disabled');
             $(".bid_button_auto_change").addClass('bggreen');
-            html += '<div class="col-50 items_amount_container bggreen">';
+            html += '<div class="col-50 items_amount_container items_amount_container_change_color bggreen">';
         }
 
         html += '<p>Bidded Amount</p>'+
@@ -418,6 +433,8 @@ myApp.onPageInit('bid_items', function (page) {
 
        $("#biditems_inner_container").html(html);
 
+       $("#item_bid_amount").attr("placeholder", Number(res.items_data.bid_amount)+1);
+
        myApp.hideIndicator();
     }).error(function(res) {
         alert("Some Error Occured, Please check your network connectivity.");
@@ -426,23 +443,357 @@ myApp.onPageInit('bid_items', function (page) {
     })
     // myApp.showIndicator();
     // myApp.hideIndicator();
+
+    $(".submit_your_bid").click(function(e){
+        e.preventDefault();
+        if (item_id == 0) {
+            alert("Not able to Bid on selected Item, Please try after some time.");
+            return false;
+        } else {
+            if ($("#item_bid_amount").val()) {
+                if ($("#item_bid_amount").val().match(numbers_validator)) {
+                    $.ajax({
+                        url: base_url+'bid_execute',
+                        type: 'POST',
+                        crossDomain: true,
+                        data: {
+                            item_id: item_id,
+                            user_id: token_data.id,
+                            price: $("#item_bid_amount").val(),
+                        }
+                    }).done(function(res) {
+                        // console.log(res);
+                        if (res.status == 'Success') {
+                            $(".bid_button_auto_change").removeClass("bggreen");
+                            $(".bid_button_auto_change").addClass("bgred");
+                        }
+                        alert(res.msg);
+                    }).error(function(res) {
+                        alert("Some Error Occured, Please check your network connectivity.");
+                        return false;
+                    })
+                } else {
+                    alert("Please enter valid Bid Amount");
+                    return false;
+                }
+            } else {
+                alert("Please enter the Bid Amount");
+                return false;
+            }
+        }
+    })
 })
 
 myApp.onPageInit('register', function (page) {
     $(".navbar_title").html('Register');
     myApp.closePanel();
     myApp.showIndicator();
+    item_id = 0;
 })
 
-myApp.onPageInit('event_inner', function (page) {
+myApp.onPageInit('favorite_items', function (page) {
+    mainView.showNavbar();
+    $(".navbar_title").html('Favorite Items');
+    mainView.showNavbar();
+    myApp.closePanel();
+    myApp.showIndicator();
+
+    $(".open-popup").click(function() {
+        myApp.popup('.popup-about');
+    })
+
+    $(".submit").click(function() {
+        $(".close-popup").click();
+    })
+
+    $("#items_listing").empty();
+
+    $.ajax({
+        url: base_url+'get_favorite_items',
+        type: 'POST',
+        crossDomain: true,
+        data: {
+            user_id: token_data.id,
+            category_id: category_id,
+            auction_id: auction_id,
+            filter_state: filter_state,
+        },
+    }).done(function(res) {
+        if (res.status == 'Success') {
+            var html = '';
+            $.each(res.productdata, function(index, value) {
+                html += '<div class="card" onclick="goto_items_inner_page('+value.id+');">'+
+                        '<div class="card-header">'+
+                        '<div class="col-50">'+
+                        '<img src="'+image_path+value.image+'" class="items_img lazy">'+
+                        '</div>'+
+                        '<div class="col-50">'+
+                        '<p>'+value.item_name+'</p>'+
+                        '<p>'+value.item_id+'</p>'+
+                        '<p style="font-size: 14px;">Num of Image: '+value.num_images+'</p>'+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="card-header pad0">'+
+                        '<div class="col-50 items_amount_container bggreen">'+
+                        '<p>Floor Amount</p>'+
+                        '<p><i class="'+value.currency_type+'" aria-hidden="true"></i> '+value.floor_amount+'</p>'+
+                        '</div>';
+                if (value.bid == 2) {
+                    html += '<div class="col-50 items_amount_container change_clr_cls_'+value.id+' bgred">';
+                } else {
+                    html += '<div class="col-50 items_amount_container change_clr_cls_'+value.id+' bggreen">';
+                }
+                html += '<p>Bidded Amount</p>'+
+                        '<p><i class="'+value.currency_type+'" aria-hidden="true"></i> '+value.bid_amount+'</p>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>';
+            })
+
+            $("#items_listing").html(html);
+            myApp.hideIndicator();
+        } else {
+            alert("Some error occured while fetching the data, Please try again later.");
+            myApp.hideIndicator();
+            return false;
+        }
+    }).error(function(res) {
+        alert("Some Error Occured, Please check your network connectivity.");
+        myApp.hideIndicator();
+        return false;
+    })
 })
 
-myApp.onPageInit('tabs', function (page) {
+myApp.onPageInit('bidded_items', function (page) {
+    mainView.showNavbar();
+    $(".navbar_title").html('Bidded Items');
+    mainView.showNavbar();
+    myApp.closePanel();
+    myApp.showIndicator();
 
+    $(".open-popup").click(function() {
+        myApp.popup('.popup-about');
+    })
+
+    $(".submit").click(function() {
+        $(".close-popup").click();
+    })
+
+    $("#items_listing").empty();
+
+    $.ajax({
+        url: base_url+'get_bidded_items',
+        type: 'POST',
+        crossDomain: true,
+        data: {
+            user_id: token_data.id,
+            category_id: category_id,
+            auction_id: auction_id,
+            filter_state: filter_state,
+        },
+    }).done(function(res) {
+        if (res.status == 'Success') {
+            var html = '';
+            $.each(res.productdata, function(index, value) {
+                html += '<div class="card" onclick="goto_items_inner_page('+value.id+');">'+
+                        '<div class="card-header">'+
+                        '<div class="col-50">'+
+                        '<img src="'+image_path+value.image+'" class="items_img lazy">'+
+                        '</div>'+
+                        '<div class="col-50">'+
+                        '<p>'+value.item_name+'</p>'+
+                        '<p>'+value.item_id+'</p>'+
+                        '<p style="font-size: 14px;">Num of Image: '+value.num_images+'</p>'+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="card-header pad0">'+
+                        '<div class="col-50 items_amount_container bggreen">'+
+                        '<p>Floor Amount</p>'+
+                        '<p><i class="'+value.currency_type+'" aria-hidden="true"></i> '+value.floor_amount+'</p>'+
+                        '</div>';
+                if (value.bid == 2) {
+                    html += '<div class="col-50 items_amount_container change_clr_cls_'+value.id+' bgred">';
+                } else {
+                    html += '<div class="col-50 items_amount_container change_clr_cls_'+value.id+' bggreen">';
+                }
+                html += '<p>Bidded Amount</p>'+
+                        '<p><i class="'+value.currency_type+'" aria-hidden="true"></i> '+value.bid_amount+'</p>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>';
+            })
+
+            $("#items_listing").html(html);
+            myApp.hideIndicator();
+        } else {
+            alert("Some error occured while fetching the data, Please try again later.");
+            myApp.hideIndicator();
+            return false;
+        }
+    }).error(function(res) {
+        alert("Some Error Occured, Please check your network connectivity.");
+        myApp.hideIndicator();
+        return false;
+    })
 })
 
-myApp.onPageInit('sign_up', function (page) {
+myApp.onPageInit('viewed_items', function (page) {
+    mainView.showNavbar();
+    $(".navbar_title").html('Viewed Items');
+    mainView.showNavbar();
+    myApp.closePanel();
+    myApp.showIndicator();
 
+    $(".open-popup").click(function() {
+        myApp.popup('.popup-about');
+    })
+
+    $(".submit").click(function() {
+        $(".close-popup").click();
+    })
+
+    $("#items_listing").empty();
+
+    $.ajax({
+        url: base_url+'get_viewed_items',
+        type: 'POST',
+        crossDomain: true,
+        data: {
+            user_id: token_data.id,
+            category_id: category_id,
+            auction_id: auction_id,
+            filter_state: filter_state,
+        },
+    }).done(function(res) {
+        if (res.status == 'Success') {
+            var html = '';
+            $.each(res.productdata, function(index, value) {
+                html += '<div class="card" onclick="goto_items_inner_page('+value.id+');">'+
+                        '<div class="card-header">'+
+                        '<div class="col-50">'+
+                        '<img src="'+image_path+value.image+'" class="items_img lazy">'+
+                        '</div>'+
+                        '<div class="col-50">'+
+                        '<p>'+value.item_name+'</p>'+
+                        '<p>'+value.item_id+'</p>'+
+                        '<p style="font-size: 14px;">Num of Image: '+value.num_images+'</p>'+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="card-header pad0">'+
+                        '<div class="col-50 items_amount_container bggreen">'+
+                        '<p>Floor Amount</p>'+
+                        '<p><i class="'+value.currency_type+'" aria-hidden="true"></i> '+value.floor_amount+'</p>'+
+                        '</div>';
+                if (value.bid == 2) {
+                    html += '<div class="col-50 items_amount_container change_clr_cls_'+value.id+' bgred">';
+                } else {
+                    html += '<div class="col-50 items_amount_container change_clr_cls_'+value.id+' bggreen">';
+                }
+                html += '<p>Bidded Amount</p>'+
+                        '<p><i class="'+value.currency_type+'" aria-hidden="true"></i> '+value.bid_amount+'</p>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>';
+            })
+
+            $("#items_listing").html(html);
+            myApp.hideIndicator();
+        } else {
+            alert("Some error occured while fetching the data, Please try again later.");
+            myApp.hideIndicator();
+            return false;
+        }
+    }).error(function(res) {
+        alert("Some Error Occured, Please check your network connectivity.");
+        myApp.hideIndicator();
+        return false;
+    })
+})
+
+myApp.onPageInit('profile', function (page) {
+    mainView.showNavbar();
+    $(".navbar_title").html('Items');
+    mainView.showNavbar();
+    myApp.closePanel();
+    myApp.showIndicator();
+    item_id = 0;
+
+    $.ajax({
+        url: base_url+'profile_details',
+        type: 'POST',
+        crossDomain: true,
+        data: {user_id: token_data.id,},
+    }).done(function(res) {
+        console.log(res);
+        $("#disp_name").val(res.name);
+        $("#disp_username").val(res.username);
+        $("#disp_email").val(res.email_id);
+        $("#disp_contact").val(res.contact);
+        $("#disp_city").val(res.city);
+        $("#disp_country").val(res.country);
+
+        $("#profile_amount_listing").empty();
+
+        if (res.amount_flag == 1) {
+            var html = '';
+            $.each(res.amount, function(index, value) {
+                html+= '<li>'+
+                        '<div class="item-content">'+
+                        '<div class="item-inner">'+
+                        '<div class="item-input">'+
+                        '<label style="font-size: smaller;">Amount in Account ('+index+')</label>'+
+                        '<input type="text" id="disp_amount" placeholder="Amount in '+index+'" value="'+value+'" disabled>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</li>';
+            })
+
+            $("#profile_amount_listing").html(html);
+        }
+
+    }).error(function(res) {
+        alert("Some Error Occured, Please check your network connectivity.");
+        myApp.hideIndicator();
+        return false;
+    })
+
+    myApp.hideIndicator();
+})
+
+myApp.onPageInit('notification', function (page) {
+    mainView.showNavbar();
+    $(".navbar_title").html('Items');
+    mainView.showNavbar();
+    myApp.closePanel();
+    myApp.showIndicator();
+    item_id = 0;
+
+    $.ajax({
+        url: base_url+'notifications',
+        type: 'POST',
+        crossDomain: true,
+        data: {user_id: token_data.id,},
+    }).done(function(res) {
+        console.log(res);
+        $("#notification_container").empty();
+
+        var html =  '<div class="card">'+
+                    '<div class="card-header">Notifications</div>';
+        $.each(res.data, function(index, value) {
+            html += '<div class="card-content card-content-padding" style="padding: 4%">'+value.text+'</div>';
+        })
+            html += '</div>';
+
+        $("#notification_container").html(html);
+
+    }).error(function(res) {
+        alert("Some Error Occured, Please check your network connectivity.");
+        myApp.hideIndicator();
+        return false;
+    })
+
+    myApp.hideIndicator();
 })
 
 myApp.onPageInit('mall_facts', function (page) {
