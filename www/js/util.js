@@ -149,7 +149,7 @@ function check_bid_status() {
                     $(".items_amount_container_change_color").addClass('bggreen');
                 }
             }).error(function(res) {
-                alert("Some Error Occured, Please check your network connectivity.");
+                // alert("Some Error Occured, Please check your network connectivity.");
                 myApp.hideIndicator();
                 return false;
             })
@@ -171,6 +171,7 @@ function check_bid_list() {
             // console.log(res);
             if (res.status == 'Success') {
                 $.each(res.flag_data, function(index, value) {
+                    $(".update_bid_amounts_dynamic_"+value.id).text(value.bid_amount);
                     if (value.bid == 2) {
                         $(".change_clr_cls_"+value.id).removeClass("bggreen");
                         $(".change_clr_cls_"+value.id).addClass("bgred");
@@ -183,7 +184,7 @@ function check_bid_list() {
                 // No Need to anything you ASSHOLE
             }
         }).error(function(res) {
-            alert("Some Error Occured, Please check your network connectivity.");
+            // alert("Some Error Occured, Please check your network connectivity.");
             myApp.hideIndicator();
             return false;
         })

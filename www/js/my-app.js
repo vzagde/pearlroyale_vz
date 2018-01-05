@@ -104,7 +104,7 @@ myApp.onPageInit('categories', function (page) {
                     }
                     bidded_items_html += '<div class="card">'+
                                          '<div class="card-header">'+value.item_name+'</div>'+
-                                         '<div class="card-header">Current Bidded Price: '+value.bid_amount+' '+value.currency_type+'</div>'+
+                                         '<div class="card-header">Current Bidded Price: <span class="update_bid_amounts_dynamic_'+value.id+'">'+value.bid_amount+'</span> '+value.currency_type+'</div>'+
                                          '</div>'+
                                          '</div>';
                 })
@@ -256,7 +256,7 @@ myApp.onPageInit('items', function (page) {
                     html += '<div class="col-50 items_amount_container change_clr_cls_'+value.id+' bggreen">';
                 }
                 html += '<p>Bidded Amount</p>'+
-                        '<p><i class="'+value.currency_type+'" aria-hidden="true"></i> '+value.bid_amount+'</p>'+
+                        '<p><i class="'+value.currency_type+'" aria-hidden="true"></i> <span class="update_bid_amounts_dynamic_'+value.id+'">'+value.bid_amount+'</span></p>'+
                         '</div>'+
                         '</div>'+
                         '</div>';
@@ -322,7 +322,7 @@ myApp.onPageInit('items_inner', function (page) {
         }
 
         html += '<p>Bidded Amount</p>'+
-               '<p><i class="'+res.items_data.currency_type+'" aria-hidden="true"></i> '+res.items_data.bid_amount+'</p>'+
+               '<p><i class="'+res.items_data.currency_type+'" aria-hidden="true"></i> <span class="update_bid_amounts_dynamic_'+item_id+'">'+res.items_data.bid_amount+'</span></p>'+
                '</div>'+
                '</div>'+
                '</div>';
@@ -426,7 +426,7 @@ myApp.onPageInit('bid_items', function (page) {
         }
 
         html += '<p>Bidded Amount</p>'+
-               '<p><i class="'+res.items_data.currency_type+'" aria-hidden="true"></i> '+res.items_data.bid_amount+'</p>'+
+               '<p><i class="'+res.items_data.currency_type+'" aria-hidden="true"></i> <span class="update_bid_amounts_dynamic_'+item_id+'">'+res.items_data.bid_amount+'</span></p>'+
                '</div>'+
                '</div>'+
                '</div>';
