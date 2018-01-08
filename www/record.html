@@ -1,0 +1,54 @@
+<div class="page" data-page="record" style="background-color: #fff;">
+	<div class="navbar header">
+		<div class="navbar-inner">
+		    <div class="sliding" style="left:0px !important;"><img src="img/abbott.png" class="header-logo" ></div>
+		    <div class="right">
+		    	<a href="#" class="link icon-only open-panel" ><i class="material-icons" style="color:white;">menu</i></a>
+		    </div>
+		</div>
+	</div>
+	<div class="page-content" style="padding-bottom: 0px!important;">
+		<a href="" onclick="records_listing()"><img style="padding:5%;" src="img/approvals_new.png" alt=""></a>
+		<div class="row">
+			<input type="hidden" name="patient_record_edit_id" id="patient_record_edit_id">
+			<div class="col-40">
+				<p style="margin: 0% 0% 0% 9%!important;color: #8A8A8A;font-weight: bold">Patient Gender:</p>
+			</div>
+			<div class="col-30">
+				<input style="float: left;color: #8A8A8A;font-weight: bold; width: 30px; height: 30px" type="radio" name="gender" value="male">
+				<p style="float: left; margin: 4%">Male</p>
+			</div>
+			<div class="col-30">
+				<input style="float: left;color: #8A8A8A;font-weight: bold; width: 30px; height: 30px" type="radio" name="gender" value="female">
+				<p style="float: left; margin: 4%">Female</p>
+			</div>
+		</div>
+		<hr>
+		<p style="margin: 5% 0% 3% 3%;color: #8A8A8A;font-weight: bold">Patient Age:</p>
+		<ul class="tabrow" >
+			<li class="" data-value="0-12"><a href="">0-12</a></li>
+			<li class="" data-value="13-18"><a href="">13-18</a></li>
+			<li class="" data-value="19-30"><a href="">19-30</a></li>
+			<li class="" data-value="31-40"><a href="">31-40</a></li>
+		</ul>
+		<ul class="tabrow" style="margin-bottom:7%;">
+			<li class="" data-value="41-50"><a href="">41-50</a></li>
+			<li class="" data-value="51-60"><a href="">51-60</a></li>
+			<li class="" data-value="61-70"><a href="">61-70</a></li>
+		</ul>
+		<hr>
+		<div class="row" style="padding-top: 2%;">
+			<p style="margin: 0% 0% 0% 3%!important;color: #8A8A8A;font-weight: bold;">Indication:</p>
+			<select style="border: none;border-bottom: 1px solid gray;padding:0 2% 2%;margin:0% 18% 3% 3%;background: #fff;font-family: 'Brandon Grotesque';font-size: 15px;" id="indication">
+			</select>
+		</div>
+		<hr>
+		<div class="row" style="padding-top: 2%;">
+			<p style="margin:0 3%!important;color: #8A8A8A;font-weight: bold;">FibroScan Value:</p>
+			<input type="number"  style="border: none;border-bottom: 1px solid gray;width: 22%;font-size: 20px;text-align: center;" max="75"  id="kpa"><p style="padding-right: 25%;margin: 0px;">(KPA)</p>
+			<p style="margin:2% 0 0 23%;">(Decimal Values can be enterd here)</p>
+		</div>
+		 <p class="proceed" id="add_record_btn"><a href="" class="proceed2" onclick="add_record()">Add record</a></p>
+		 <p class="proceed" id="update_record_btn" style="display:none"><a href="" class="proceed2" onclick="update_record()">update record</a></p>
+	</div>
+</div>

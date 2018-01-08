@@ -1,0 +1,172 @@
+<style type="text/css">
+	.button{
+		border: 0px solid #fff;
+		border-top: 1px solid #fff;
+		border-bottom: 1px solid #fff;
+	}
+
+	.button.active{
+		background: #4f4f4f;
+	}
+</style>
+<div class="page" data-page="leader_board_screen" style="background-color: #fff;">
+	<div class="navbar header">
+	  <div class="navbar-inner">
+	    <div class="sliding" style="left:0px !important;"><img src="img/abbott.png" class="header-logo" ></div>
+	    <div class="right">
+	      <a href="#" class="link icon-only open-panel"><i class="material-icons" style="color:white;" >menu</i></a>
+	    </div>
+	  </div>
+	</div>
+	<div class="page-content" style="padding-bottom: 0px!important;">
+		<div class="content-block" style="padding:0px 0px!important;margin: 0px 0px!important;">
+	      <div class="buttons-row">
+	        <a href="#all" data-id="list_type" class="tab-link active button camp_tab leader_board_tab" style="font-size: 15px; line-height: 20px"><b>All</b></a>
+	        <a href="#single" data-id="list_type_1" class="tab-link button camp_tab leader_board_tab" style="font-size: 15px; line-height: 20px"><b>Single <br><br> Machines</b></a>
+	        <a href="#two" data-id="list_type_2" class="tab-link button camp_tab leader_board_tab" style="font-size: 15px; line-height: 20px"><b>Two <br><br> Machines</b></a>
+	      </div>
+	    </div>
+		<!-- <div class="row">
+			<div class="col-50">
+				<p>form: &nbsp;<input  style="width: 60%;border: none;background-color: #F3F3F3;" type="date"> </p>
+			</div>
+			<div class="col-50">
+				<p>to: &nbsp;<input style="width: 60%;border: none;background-color: #F3F3F3;"  type="date"></p>
+			</div>
+		</div> -->
+		<!-- <div id="leader_board_data">
+		</div> -->
+		<!-- <div class="row" style="background-color: #F3F3F3">
+			<div class="row leader_board"  style="padding: 6% 5%;">
+				<div class="col-100">
+					<p style="font-weight: bold;font-size:20px;color:#000;">FAM01</p>
+				</div>
+				<div class="col-80">
+					<p class="leader_txt">No.of proposed camps</p>
+				</div>
+				<div class="col-20">
+					<p class="leader_no"  style="color:#D07268;">20</p>
+				</div>
+				<div class="col-80">
+					<p class="leader_txt">No.of compeleted camps</p>
+				</div>
+				<div class="col-20">
+					<p class="leader_no"  style="color:#402943;">10</p>
+				</div>
+				<div class="col-80">
+					<p class="leader_txt">Average no. of patients/camps</p>
+				</div>
+				<div class="col-20">
+					<p class="leader_no"  style="color:#DBB555">40</p>
+				</div>
+				<div class="col-80">
+					<p class="leader_txt">High Risk</p>
+				</div>
+				<div class="col-20">
+					<p class="leader_no"  style="color:#A7C8BD" >22%</p>
+				</div>
+			</div>
+		</div> -->
+	<div class="tabs ">
+      <div id="all" class="tab active">
+        <div class="row" style="background-color: #F3F3F3">
+          <div class="row leader_board"  style="padding: 6% 5%;">
+            <div class="col-100">
+              <p style="font-weight: bold;font-size:20px;color:#000;">all</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">No.of proposed camps</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#D07268;">20</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">No.of compeleted camps</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#402943;">10</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">Average no. of patients/camps</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#DBB555">40</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">High Risk</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#A7C8BD" >22%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="single" class="tab">
+        <div class="row" style="background-color: #F3F3F3">
+          <div class="row leader_board"  style="padding: 6% 5%;">
+            <div class="col-100">
+              <p style="font-weight: bold;font-size:20px;color:#000;">single</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">No.of proposed camps</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#D07268;">20</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">No.of compeleted camps</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#402943;">10</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">Average no. of patients/camps</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#DBB555">40</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">High Risk</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#A7C8BD" >22%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="two" class="tab">
+        <div class="row" style="background-color: #F3F3F3">
+          <div class="row leader_board"  style="padding: 6% 5%;">
+            <div class="col-100">
+              <p style="font-weight: bold;font-size:20px;color:#000;">two</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">No.of proposed camps</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#D07268;">20</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">No.of compeleted camps</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#402943;">10</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">Average no. of patients/camps</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#DBB555">40</p>
+            </div>
+            <div class="col-80">
+              <p class="leader_txt">High Risk</p>
+            </div>
+            <div class="col-20">
+              <p class="leader_no"  style="color:#A7C8BD" >22%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	</div>
+</div>

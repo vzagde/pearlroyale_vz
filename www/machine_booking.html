@@ -1,0 +1,140 @@
+<!-- <div class="pages navbar-through toolbar-through"> -->
+<div data-page="machine_booking" class="page machine_page">
+   <div class="navbar header">
+      <div class="navbar-inner">
+         <div class="sliding" style="left:0px !important;"><img src="img/abbott.png" class="header-logo" ></div>
+         <div class="right">
+            <a href="#" class="link icon-only open-panel" ><i class="material-icons" style="color:white;">menu</i></a>
+         </div>
+      </div>
+   </div>
+   <div style="padding-bottom:0;" class="page-content">
+      <div class="list-block" style="margin:0px 0%;">
+         <ul>
+            <li>
+               <div class="item-content ">
+                  <div class="item-inner txt_border">
+                     <div class="item-input txt_mrg">
+                        <select style="font-size:16px;color:#AAAAAA;font-family: 'Brandon Grotesque';" name="doctor-list" id="doctor-list">
+                           <option value="">Name of Doctor</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+            </li>
+            <li>
+               <div class="item-content ">
+                  <div class="item-inner txt_border">
+                     <div class="item-input txt_mrg">
+                        <!-- <input style="font-size:16px;font-family: 'Brandon Grotesque';" type="text" class="place" placeholder="Speciality Of Doctor" id="doctor_speciality"> -->
+                        <select style="font-size:16px;color:#AAAAAA;font-family:'Brandon Grotesque';"  id="doctor_speciality">
+                              <option value="0">Speciality Of Doctor</option>
+                              <option value="Gastro">Gastro</option>
+                              <option value="CP">CP</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+            </li>
+            <li>
+               <div class="item-content ">
+                  <div class="item-inner txt_border">
+                     <div class="item-input txt_mrg">
+                        <input style="font-size:16px;font-family: 'Brandon Grotesque';" type="text" class="place" placeholder="Address Of the Hospital/Clinic" id="doctor_address">
+                     </div>
+                  </div>
+               </div>
+            </li>
+            <li>
+               <div class="item-content ">
+                  <div class="item-inner txt_border">
+                     <div class="item-input txt_mrg">
+                        <!-- <input disabled style="font-size:16px; font-family: 'Brandon Grotesque';" type="text" class="place" placeholder="Doctor type" id="doctor_type"> -->
+                     <select style="font-size:16px;color:#AAAAAA;font-family:'Brandon Grotesque';"  id="doctor_type">
+                           <option value="0">Doctor type</option>
+                           <option value="Government">Government</option>
+                           <option value="Private">Private</option>
+                     </select>
+                     </div>
+                  </div>
+               </div>
+            </li>
+            <li>
+               <div class="item-content ">
+                  <div class="item-inner txt_border">
+                     <div class="item-input txt_mrg">
+                        <select style="font-size:16px;color:#AAAAAA;font-family:'Brandon Grotesque';" name="clinic_camp" id="clinic_camp">
+                           <option value="0">Clinic/Camp</option>
+                           <option value="clinic">Clinic</option>
+                           <option value="camp">Camp</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+            </li>
+            <li>
+               <div class="item-content ">
+                  <div class="item-inner txt_border">
+                     <div class="item-input txt_mrg">
+                        <input style="font-size:16px;font-family: 'Brandon Grotesque';" type="number" class="place" placeholder="Expected No. of Registration" id="expected_number_of_registration">
+                     </div>
+                  </div>
+               </div>
+            </li>
+            <li>
+               <div class="item-content" id="vz_block_machine_id">
+                  <div class="item-inner txt_border1" style="margin-top: 4%;">
+                     <div class="item-input ">
+                        <input type="checkbox" name="block_machine" id="block_machine" value="yes" style="transform: scale(1.6);"><b style="font-size:16px;font-family: 'Brandon Grotesque';">&nbsp;Block a machine</b>
+                     </div>
+                  </div>
+               </div>
+            </li>
+            <li>
+               <div class="item-content" id="vz_available_at_camp_id">
+                  <div class="item-inner txt_border1">
+                     <div class="item-input ">
+                        <input  type="checkbox" name="available_at_camp" id="available_at_camp" value="yes" style="transform: scale(1.6);"><b style="font-size:16px;font-family: 'Brandon Grotesque';">&nbsp;I will be available at the Camp</b>
+                     </div>
+                  </div>
+               </div>
+            </li>
+         </ul>
+      </div>
+      <div class="row" style="text-align: center;">
+         <div class="list-block wdh" style="margin:0px 0px;">
+            <ul>
+               <li>
+                  <div class="item-content clock-item-content">
+                     <div class="item-inner clock-item-inner clock-item-inner-start">
+                        <p id="start-time-clock">Start Time</p>
+                        <input type="time" name="start-time-clock" id="start-time-input" onchange="getStartTime();" style="width: 100%; position: absolute; color: rgba(230, 230, 230, 0);height:100%;left:0;top:0;">
+                        <i class="material-icons">access_time</i>
+                     </div>
+                     <div class="item-inner clock-item-inner clock-item-inner-end">
+                        <p id="end-time-clock">End Time</p>
+                        <input type="time" name="end-time-clock" id="end-time-input" onchange="getEndTime();" style="width: 100%; position: absolute; color: rgba(230, 230, 230, 0);height:100%;left:0;top:0;">
+                        <i class="material-icons">access_time</i>
+                     </div>
+                  </div>
+               </li>
+            </ul>
+         </div>
+         <div class="list-block wdh" style="margin: 10px 0px 20px;" >
+            <ul id="add-dates-display" style="display:none;">
+               <li>
+                  <div class="item-content" style="margin: 15px 0 0; background: #e6e6e6;">
+                     <div class="item-inner" style="padding: 0">
+                        <div id="add-more-date" style="font-family: 'Brandon Grotesque' !important">
+                           <i class="fa fa-calendar-plus-o" aria-hidden="true" style="font-size: 20px!important;"></i>&nbsp;Add more dates
+                           <input type="date" name="date-clinic-set" id="date-clinic-set" onchange="addDatesClinic();">
+                        </div>
+                     </div>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <p class="proceed"><a href="#" class="proceed2" onclick="submit_machine_booking()" >Book a Camp</a></p>
+   </div>
+</div>

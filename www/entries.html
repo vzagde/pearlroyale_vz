@@ -1,0 +1,63 @@
+<div class="page" data-page="entries" style="background-color: #fff;">
+	<div class="navbar header">
+	  <div class="navbar-inner">
+	    <div class="sliding" style="left:0px !important;"><img src="img/abbott.png" class="header-logo" ></div>
+	    <div class="right">
+
+	      <a href="#" class="link icon-only open-panel" ><i class="material-icons" style="color:white;">menu</i></a>
+	    </div>
+	  </div>
+	</div>
+	<div class="page-content" style="">
+		<a href="record.html"><i style="margin: 5%; font-size: 20px;" class="fa fa-arrow-left" aria-hidden="true"></i></a>
+		<p style="margin: 5%; color:#007AFF;font-size: 22px;font-weight: bold;float: right;" id="number_of_entry">No.of Entries : 0</p>
+		<hr>
+		<div id="record_listing">
+		</div>
+		<p id="myBtn1" class="proceed"><a href="#" class="proceed2">End Camp</a></p>
+
+		<div id="myModal1" class="modal modal-in" style="display: none; position: fixed; margin-top: -76px;">
+    		<div class="modal-inner" style="border: solid 1px #1095d2">
+        		<div class="modal-title" style="padding: 10px 0;">
+            		<p style="position: absolute; width: 50%; margin: 0 20% !important; text-align: left;" id="end_time_update_dash">End Time</p>
+            		<i class="material-icons" style="float: right; margin: -3% 20%; font-size: 35px">av_timer</i>
+            		<!-- <input type="time" style="border:none;border-bottom: 1px solid gray;" id="end_camp_time"> -->
+            		<input type="time" style="border:none; border-bottom: 1px solid gray; border-bottom: none; position: absolute; width: 50%; left: 4%; color: transparent; background: transparent; margin: 0 20%;" id="end_camp_time" onchange="getEndTime_Dash()">
+					<a href="#" onclick="open_dialog_for_image()" id=""><img style="width: 20%;padding: 7% 38% 2%;" src="img/plus.png" alt=""></a>
+					<div class="row" style="max-height: 100px;overflow-y: scroll;" id="image_append">
+						<!-- <div class="col-33">
+							<img class="upload_img" src="" alt="" >
+						</div> -->
+					</div>
+        		</div>
+        		<div class="modal-text">
+            		<p id="time_error_tech"></p>
+        		</div>
+    		</div>
+    		<div class="modal-buttons modal-buttons-1">
+        		<span class="modal-button modal-button-bold" id="complete_camp">OK</span>
+        		<span class="modal-button modal-button-bold" id="cancel_end_technician">Cancel</span>
+    		</div>
+		</div>
+
+		<!-- <div id="myModal1" class="modalA" type="">
+			 <div class="modalA-content">
+				<div class="modalA-header">
+					<span class="close" style="margin-top: -10px;margin-right: 0px;background-color: transparent;color: #000;text-align: right;">×</span>
+				</div>
+				<div class="modalA-body">
+					<input type="time" style="border:none;border-bottom: 1px solid gray;" id="end_camp_time">
+					<a href="#" onclick="open_dialog_for_image()" id=""><img style="width: 20%;padding: 7% 38% 2%;" src="img/plus.png" alt="">
+					<div class="row" style="max-height: 100%;overflow-y: scroll;" id="image_append">
+						<div class="col-33">
+							<img class="upload_img" src="" alt="" >
+						</div>
+					</div>
+				</div>
+				<div class="modalA-footer" >
+					<a href="" id="complete_camp"><h3>End Camp</h3></a>
+				</div>
+			</div>
+		</div> -->
+	</div>
+</div>
