@@ -1,4 +1,4 @@
-var base_url = 'https://pearlroyale.com/pearlroyale_admin/index.php/api_new/';
+var base_url = 'http://pearlroyale.com/pearlroyale_admin/index.php/api_new/';
 var mall_id = 0;
 var event_id = 0;
 var store_category_id = 0;
