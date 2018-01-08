@@ -1,7 +1,7 @@
 var load_ui = [];
 var threed_src = '';
-var base_url = 'http://pearlroyale.com/pearlroyale_admin/index.php/api_new/';
-var image_path = 'http://pearlroyale.com/pearlroyale_admin/assets/uploads/';
+var base_url = 'https://pearlroyale.com/pearlroyale_admin/index.php/api_new/';
+var image_path = 'https://pearlroyale.com/pearlroyale_admin/assets/uploads/';
 
 var numbers_validator = /^[0-9]+$/;  
 
