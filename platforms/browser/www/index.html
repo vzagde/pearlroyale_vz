@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
+    <title>Pearlroyale</title>
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,500i,600,600i,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/countdown.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.min.css">
+</head>
+<body>
+    <div class="pearlroyale_preloader">
+        <img src="logo.jpg" class="login_image">
+    </div>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-left panel-reveal">
+        <div class="content-block pad0">
+            <br><br>
+            <a href="profile.html"><p class="menu_list">Profile</p></a>
+            <a href="categories.html"><p class="menu_list">Home</p></a>
+            <a href="favorite_items.html"><p class="menu_list">Favorite Items</p></a>
+            <a href="bidded_items.html"><p class="menu_list">Bidded Items</p></a>
+            <a href="viewed_items.html"><p class="menu_list">Recently Viewed</p></a>
+            <a href="categories.html"><p class="menu_list">About Pearlroyale</p></a>
+            <a href="notification.html"><p class="menu_list">Notification</p></a>
+            <a href="#" onclick="logout();"><p class="menu_list">Logout</p></a>
+        </div>
+    </div>
+    <div class="views">
+        <div class="view view-main">
+            <div class="pages navbar-through toolbar-through">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div>
+                            <a href="#" class="open-left-panel"><i class="fa fa-bars menu_bars" aria-hidden="true"></i></a>
+                            <img src="logo.jpg" class="menu_logo_image">
+                            <h4 class="navbar_title"></h4>
+                            <i class="fa fa-heart-o menu_icons_right" aria-hidden="true"></i>
+                            <i class="fa fa-bell-o menu_icons_right" aria-hidden="true"></i>
+                            <i class="fa fa-star-o menu_icons_right" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+                <div data-page="index" class="page">
+                    <img src="logo.jpg" class="login_image">
+                    <div class="content-block-title text-center"><h2>SIGN IN</h2></div>
+                    <div class="list-block pad5">
+                        <br><br>
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="email" placeholder="Email ID" value="" id="email_id">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="password" placeholder="Password" value="" id="password">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content text-center">
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <button class="btn-pearlroyale sign_in" onclick="signin()">LOGIN</button>
+                                            <a href="register.html">Create New Account?</a>
+                                            <br>
+                                            <a href="categories.html">Forgot Password?</a>
+                                            <br><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/lockr.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/slick.js"></script>
+    <script type="text/javascript" src="js/webStorage.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/countdown.js"></script>
+    <script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
+    <script type="text/javascript" src="js/my-app.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
+</body>
+</html>
