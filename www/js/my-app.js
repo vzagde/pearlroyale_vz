@@ -553,6 +553,37 @@ myApp.onPageInit('register', function (page) {
     item_id = 0;
 })
 
+myApp.onPageInit('about', function (page) {
+    $(".navbar_title").html('About');
+    myApp.closePanel();
+    myApp.showIndicator();
+    myApp.hideIndicator();
+    $.ajax({
+        url: base_url+'get_about',
+        type: 'POST',
+        crossDomain: true,
+    }).done(function(res) {
+        if (res.status == 'Success') {
+            $("#about_us_dynamic_content").empty();
+            var html = '';
+            $.each(res.data, function(index, value) {
+                html += value.content;
+            })
+            $("#about_us_dynamic_content").html(html);
+        } else {
+            alert("Some Error Occured, Please check your network connectivity.");
+            myApp.hideIndicator();
+            return false;
+        }
+
+    }).error(function(res) {
+        alert("Some Error Occured, Please check your network connectivity.");
+        myApp.hideIndicator();
+        return false;
+    })
+})
+
+
 myApp.onPageInit('favorite_items', function (page) {
     mainView.showNavbar();
     $(".navbar_title").html('Favorite Items');
@@ -815,14 +846,13 @@ myApp.onPageInit('profile', function (page) {
 
             $("#profile_amount_listing").html(html);
         }
+        myApp.hideIndicator();
 
     }).error(function(res) {
         alert("Some Error Occured, Please check your network connectivity.");
         myApp.hideIndicator();
         return false;
     })
-
-    myApp.hideIndicator();
 })
 
 myApp.onPageInit('notification', function (page) {
